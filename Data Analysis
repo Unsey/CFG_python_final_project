@@ -1,0 +1,75 @@
+
+import csv
+import pandas as pd
+
+#No 1
+data = pd.read_csv('sales.csv')
+df = pd.DataFrame(data)
+
+# No 2
+def get_sales_per_month():
+    print(data.loc[:, ['month', 'sales']])
+
+# get_sales_per_month()
+
+# No 3
+def get_total_sales():
+    total_sales = df['sales'].sum()
+    # print("Total sum of sales is: " + str(total_sales))
+    return total_sales
+
+# get_total_sales()
+
+#Extension
+def output_summary_to_spreadsheet():
+    sales_summary = df.describe()
+    print(sales_summary)
+
+    f = open("sales.csv", "a")
+    f.write("Now the file has more content!")
+    f.close()
+
+    print()
+
+    #open and read the file after the appending:
+    f = open("sales.csv", "r")
+    print(f.read())
+
+# output_summary_to_spreadsheet()
+
+def get_monthly_percentage_change():
+    df['sales_pct_change'] = df['sales'].pct_change()
+    print(df)
+
+# get_monthly_percentage_change()
+
+def get_avg_sales():
+
+    avg_sales = get_total_sales()/len(df.index)-1
+    print("Avg sales  is: " + str(avg_sales))
+
+# get_avg_sales()
+
+def calculate_maximum():
+    max_sale = df["sales"].max()
+    print("Maximum sale is: " + str(max_sale))
+
+calculate_maximum()
+
+def calculate_minimum():
+    min_sale = df["sales"].min()
+    print("Minimum sale is: " + str(min_sale))
+
+calculate_minimum()
+
+
+
+
+
+
+
+
+
+
+
+
